@@ -1,0 +1,35 @@
+@use "breakpoints" as *;
+
+.nav {
+  display: none;
+
+  @include mq(lg) {
+    display: block;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+
+.link {
+  display: block;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  color: var(--fg-dim);
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--fg);
+    background: var(--bg-elev);
+  }
+}
+
+.active {
+  color: var(--fg);
+  background: var(--bg-elev);
+}

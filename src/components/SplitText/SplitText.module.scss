@@ -1,0 +1,25 @@
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.word {
+  display: inline-block;
+}
+
+// The reveal waits for the preloader: it puts data-intro="play" on <html>
+// while its curtains open. Without JavaScript the words simply stay visible.
+:global(html[data-intro="play"]) .word {
+  animation: rise 1s var(--ease-reveal) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(110%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

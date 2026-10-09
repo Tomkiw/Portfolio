@@ -1,0 +1,180 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+// Phones: every card is full width and 16:11. From `lg` the size sets the footprint —
+// featured 7 + compact 5, half 6 + 6, third 4 × 3 columns of the 12-column grid.
+.project {
+  position: relative;
+  grid-column: span 12;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  transition: all 0.4s;
+
+  &:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+}
+
+@include mq(lg) {
+  .featured {
+    grid-column: span 7;
+    aspect-ratio: 16 / 11;
+  }
+
+  .compact {
+    grid-column: span 5;
+    aspect-ratio: 4 / 3;
+  }
+
+  .half {
+    grid-column: span 6;
+    aspect-ratio: 16 / 11;
+  }
+
+  .third {
+    grid-column: span 4;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+.number {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgb(255 255 255 / 0.5);
+}
+
+.arrow {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--fg-on-accent);
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(0.6) rotate(-45deg);
+  transition: all 0.3s;
+
+  .project:hover & {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.metrics {
+  position: absolute;
+  right: 18px;
+  bottom: 110px;
+  left: 18px;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.4s,
+    transform 0.4s;
+
+  .project:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// <dt> must come first in the markup; the value is shown on top, as in the design.
+.metric {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.metricValue {
+  margin-bottom: 2px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+
+// In the design the label was an inline span, so its line took the parent's 16px × 1.5 height.
+.metricLabel {
+  @include mono-label(9px, 0.1em);
+  line-height: 1.5rem;
+  color: var(--fg-mute);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    color-mix(in srgb, var(--bg) 95%, transparent) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+
+  .project:hover & {
+    opacity: 1;
+  }
+}
+
+.category {
+  @include mono-label(11px, 0.14em);
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.title {
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--fg-dim);
+}
+
+// Touch screens have no hover, so the text and metrics are always shown.
+// The arrow stays hidden: the cards are not links. Paper has no hover either.
+@media (hover: none), print {
+  .metrics,
+  .overlay {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media print {
+  .project {
+    break-inside: avoid;
+    transform: none;
+  }
+}

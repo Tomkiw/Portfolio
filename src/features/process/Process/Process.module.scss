@@ -1,0 +1,135 @@
+@use "breakpoints" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--line);
+  list-style: none;
+
+  @include mq(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.step {
+  position: relative;
+  padding: 36px 28px 32px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--bg-elev);
+  }
+
+  // Accent bar that slides in along the top edge on hover.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.4s;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+
+  @include mq(sm) {
+    &:nth-child(odd) {
+      border-right: 1px solid var(--line);
+    }
+  }
+
+  @include mq(lg) {
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.number {
+  display: block;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--fg-mute);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--accent);
+  transition: all 0.3s;
+
+  .step:hover & {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
+
+.title {
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg-dim);
+}
+
+// Arrows only connect steps that sit side by side. The design showed them in every
+// layout, so in one or two columns they pointed past the edge of the grid.
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  z-index: 2;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font-size: 10px;
+  color: var(--accent);
+  background: var(--bg);
+  transform: translateY(-50%);
+}
+
+@include mq(sm) {
+  .step:nth-child(odd) .arrow {
+    display: flex;
+  }
+}
+
+@include mq(lg) {
+  .arrow {
+    display: flex;
+  }
+
+  .step:last-child .arrow {
+    display: none;
+  }
+}

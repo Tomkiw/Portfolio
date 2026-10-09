@@ -1,0 +1,60 @@
+@use "breakpoints" as *;
+
+// Accent values are the ones the template actually renders: its Tweaks panel
+// recomputed --accent-2 / --accent-glow / --accent-soft on load and overrode
+// the static values written in its stylesheet.
+:root {
+  // Surfaces
+  --bg: #0a0908;
+  --bg-elev: #131211;
+  --bg-card: #181614;
+  --line: #2a2724;
+  --line-strong: #3a3733;
+
+  // Text
+  --fg: #f5f1ea;
+  --fg-dim: #c8c2b8;
+  // A shade lighter than the design's #807a72, which fell short of WCAG AA (4.5:1) on cards.
+  --fg-mute: #868078;
+  --fg-faint: #4a4640;
+  --fg-on-accent: #0a0908;
+
+  // Accent
+  --accent: #ff5a1f;
+  --accent-2: #ff6e33;
+  --accent-glow: #ff5a1f55;
+  --accent-soft: #ff5a1f1f;
+
+  // Status
+  --status-online: #22c55e;
+  --status-online-ring: rgb(34 197 94 / 0.18);
+
+  // Typography — font files and fallbacks come from next/font (src/lib/fonts.ts)
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+
+  // Layout
+  --maxw: 1280px;
+  --gutter: 20px;
+  --section-space: 80px;
+  --radius-pill: 999px;
+
+  // Motion
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-curtain: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  // Layers
+  --z-floating: 80;
+  --z-overlay: 90;
+  --z-nav: 100;
+  --z-statusbar: 999;
+  --z-cursor: 9999;
+  --z-preloader: 99999;
+
+  @include mq(sm) {
+    --gutter: 32px;
+    --section-space: 120px;
+  }
+}

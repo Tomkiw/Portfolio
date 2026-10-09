@@ -1,0 +1,112 @@
+@use "tokens";
+
+// Same reset as the template (pseudo-elements intentionally left untouched).
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background:
+    radial-gradient(1200px 700px at 75% -10%, var(--accent-soft), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgb(255 255 255 / 0.025), transparent 60%), var(--bg);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  background: 0;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--fg-on-accent);
+}
+
+// CustomCursor sets data-custom-cursor only while it is mounted, so the system cursor never
+// disappears without a replacement (the design hid it on every desktop, even before its
+// own cursor appeared). Elements with a deliberate cursor, like the grab strip, keep theirs.
+html[data-custom-cursor],
+html[data-custom-cursor] body,
+html[data-custom-cursor] a,
+html[data-custom-cursor] button {
+  cursor: none !important;
+}
+
+// The template had no focus styles at all; keyboard users need a visible ring.
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+// Print / "Save as PDF", after the design's Portfolio-print.html.
+// Components add their own print rules; these are the page-wide ones.
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  :root {
+    --gutter: 32px;
+    --section-space: 64px;
+  }
+
+  html,
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  // Everything is printed in its final state.
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  // Near-zero instead of `none` so animations still land on their final frame.
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

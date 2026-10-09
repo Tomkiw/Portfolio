@@ -1,0 +1,22 @@
+@use "mixins" as *;
+
+.finalValue {
+  @include visually-hidden;
+}
+
+// On paper the counter may never have scrolled into view, so print the real number.
+@media print {
+  .liveValue {
+    display: none;
+  }
+
+  .finalValue {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+}

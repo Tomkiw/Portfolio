@@ -1,0 +1,160 @@
+@use "breakpoints" as *;
+
+$traffic-red: #ff5f57;
+$traffic-yellow: #febc2e;
+$traffic-green: #28c840;
+$syntax-key: #7dd3fc;
+$syntax-value: #fde047;
+$line-height: 1.7;
+
+.terminal {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  background: var(--bg-card);
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.4);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+
+  span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+
+  span:nth-child(1) {
+    background: $traffic-red;
+  }
+
+  span:nth-child(2) {
+    background: $traffic-yellow;
+  }
+
+  span:nth-child(3) {
+    background: $traffic-green;
+  }
+}
+
+.title {
+  flex: 1;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--fg-mute);
+}
+
+.body {
+  padding: 20px 18px;
+  font-size: 12px;
+  line-height: $line-height;
+  color: var(--fg-dim);
+
+  @include mq(sm) {
+    padding: 28px 32px;
+    font-size: 14px;
+  }
+}
+
+// Long lines scroll sideways on their own instead of wrapping, like a real terminal.
+.line {
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// One empty terminal line between groups (the design used a <br>).
+.group {
+  margin-bottom: #{$line-height}em;
+}
+
+.tools {
+  list-style: none;
+}
+
+.bullet::before {
+  content: "▍ ";
+  color: var(--accent);
+}
+
+.prompt {
+  color: var(--fg);
+}
+
+.command {
+  color: var(--accent);
+}
+
+// The design used --fg-faint here (1.9:1 on the terminal background), too dim to read.
+.comment {
+  font-style: italic;
+  color: var(--fg-mute);
+}
+
+.key {
+  color: $syntax-key;
+}
+
+.value {
+  color: $syntax-value;
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  margin-left: 2px;
+  vertical-align: middle;
+  background: var(--accent);
+  animation: blink 0.9s steps(1) infinite;
+}
+
+.printOnly,
+.pending {
+  display: none;
+}
+
+// Paper gets the finished terminal: full command, full listing, wrapped long lines.
+@media print {
+  .screenOnly {
+    display: none;
+  }
+
+  .printOnly,
+  .pending {
+    display: block;
+  }
+
+  .line {
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}

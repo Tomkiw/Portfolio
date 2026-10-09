@@ -1,0 +1,15 @@
+// Size comes from the width/height attributes (SPARKLINE in lib/constants).
+.sparkline {
+  display: block;
+  opacity: 0.8;
+}
+
+.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.dot {
+  fill: var(--accent);
+}

@@ -1,0 +1,102 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+// The 1px gap over a line-colored background draws the grid lines between cards.
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  border: 1px solid var(--line);
+  background: var(--line);
+  list-style: none;
+
+  @include mq(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Not clickable, so no pointer cursor (the design had one).
+.service {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  padding: 40px 36px;
+  background: var(--bg);
+  transition: background 0.3s;
+
+  &:hover {
+    background: var(--bg-elev);
+  }
+
+  @media print {
+    break-inside: avoid;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--fg-mute);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--fg-mute);
+  transition: all 0.3s;
+
+  .service:hover & {
+    color: var(--accent);
+    transform: translate(4px, -4px);
+  }
+}
+
+.title {
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.description {
+  margin-bottom: 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg-mute);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+}
+
+.tag {
+  @include mono-label(10px, 0.08em);
+  padding: 5px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  color: var(--fg-dim);
+}

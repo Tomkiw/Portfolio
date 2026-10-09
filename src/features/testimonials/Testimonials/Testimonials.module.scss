@@ -1,0 +1,6 @@
+// Only adds what Section does not set, so the order of the two CSS modules never matters.
+.section {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-elev);
+}

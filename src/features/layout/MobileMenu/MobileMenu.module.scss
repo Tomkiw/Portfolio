@@ -1,0 +1,127 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+$panel-fade: 0.3s;
+$bar-thickness: 1.5px;
+
+.menu {
+  display: flex;
+
+  @include mq(lg) {
+    display: none;
+  }
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--fg);
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+.bars {
+  position: relative;
+  width: 16px;
+  height: 10px;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: $bar-thickness;
+  background: currentColor;
+  transition:
+    top 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-smooth);
+
+  &:first-child {
+    top: 0;
+  }
+
+  &:last-child {
+    top: calc(100% - #{$bar-thickness});
+  }
+
+  // Two bars fold into a cross while the menu is open.
+  .toggle[aria-expanded="true"] & {
+    top: calc(50% - #{$bar-thickness} / 2);
+  }
+
+  .toggle[aria-expanded="true"] &:first-child {
+    transform: rotate(45deg);
+  }
+
+  .toggle[aria-expanded="true"] &:last-child {
+    transform: rotate(-45deg);
+  }
+}
+
+// Sits under the header bar (negative z-index inside the bar's stacking context),
+// so the logo and the close button stay visible on top of it.
+.panel {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  padding: 96px var(--gutter) 40px;
+  overflow-y: auto;
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity $panel-fade,
+    visibility 0s linear $panel-fade;
+
+  &[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity $panel-fade;
+  }
+}
+
+.list {
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.item {
+  border-bottom: 1px solid var(--line);
+}
+
+.link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 18px 0;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--fg-dim);
+  transition: color 0.2s;
+
+  &:hover,
+  &[aria-current] {
+    color: var(--fg);
+  }
+
+  &[aria-current] .index {
+    color: var(--accent);
+  }
+}
+
+.index {
+  @include mono-label(11px, 0.12em);
+  color: var(--fg-mute);
+}

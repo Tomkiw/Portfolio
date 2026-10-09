@@ -1,0 +1,82 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+.footer {
+  padding: 56px 0 32px;
+  border-top: 1px solid var(--line);
+
+  @media print {
+    break-before: page;
+    break-inside: avoid-page;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  margin-bottom: 56px;
+
+  @include mq(sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mq(lg) {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  }
+}
+
+.intro {
+  max-width: 320px;
+  margin-top: 14px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--fg-dim);
+  text-wrap: pretty;
+}
+
+// Bold comes from the heading element itself, as with the design's <h4>.
+.heading {
+  @include mono-label(11px, 0.14em);
+  margin-bottom: 18px;
+  color: var(--fg-mute);
+}
+
+.list {
+  list-style: none;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--fg-dim);
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+// On phones the three notes stack; the design squeezed them into three narrow columns.
+.bottom {
+  @include mono-label(11px, 0.1em);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  color: var(--fg-mute);
+
+  @include mq(sm) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,43 @@
+@use "mixins" as *;
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+// In the design the footer's generic link rule (`.footer-col a`) outranked `.logo`,
+// so the footer logo rendered smaller and muted. Kept as a variant in this module,
+// after .logo, so it wins regardless of how CSS files are ordered.
+.small {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--fg-dim);
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.srOnly {
+  @include visually-hidden;
+}
+
+.bracket {
+  color: var(--accent);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin-left: 4px;
+  align-self: center;
+  background: var(--accent);
+}
