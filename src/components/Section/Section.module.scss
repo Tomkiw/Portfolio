@@ -1,0 +1,17 @@
+.section {
+  position: relative;
+  padding: var(--section-space) 0;
+}
+
+// Lives in the same file as .section, so it always comes later and wins.
+.noTopPadding {
+  padding-top: 0;
+}
+
+// Every section starts on a new page, as in the design's print version.
+@media print {
+  .section {
+    break-before: page;
+    break-inside: avoid-page;
+  }
+}

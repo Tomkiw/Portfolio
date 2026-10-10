@@ -1,0 +1,145 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+$weeks: 53;
+$days-per-week: 7;
+// Phones show the latest 26 weeks, which fit the width without sideways scrolling.
+$phone-weeks: 26;
+$hidden-on-phones: ($weeks - $phone-weeks) * $days-per-week;
+
+.card {
+  margin-top: 32px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+// Wraps on very narrow screens instead of pushing the page wider than the phone.
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.icon {
+  color: var(--fg);
+}
+
+.heading {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.demoBadge {
+  @include mono-label(10px, 0.08em);
+  padding: 3px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  color: var(--fg-mute);
+}
+
+.stats {
+  display: flex;
+  gap: 28px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-dim);
+  list-style: none;
+
+  strong {
+    margin-right: 4px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+}
+
+// Weeks are columns and days are rows, like on GitHub. The design filled the cells row by
+// row, so its pattern did not match the data it generated week by week.
+.graph {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat($days-per-week, auto);
+  grid-template-columns: repeat($phone-weeks, 1fr);
+  gap: 3px;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+
+  @include mq(sm) {
+    grid-template-columns: repeat($weeks, 1fr);
+  }
+}
+
+.cell {
+  min-width: 10px;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--bg-elev);
+}
+
+// On paper the whole year must fit the width without a scrollbar.
+@media print {
+  .graph {
+    overflow: visible;
+  }
+
+  .cell {
+    min-width: 0;
+  }
+}
+
+.graph > .cell:nth-child(-n + #{$hidden-on-phones}) {
+  display: none;
+
+  @include mq(sm) {
+    display: block;
+  }
+}
+
+.level1 {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.level2 {
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.level3 {
+  background: color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+.level4 {
+  background: var(--accent);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--fg-mute);
+
+  .cell {
+    width: 10px;
+  }
+}

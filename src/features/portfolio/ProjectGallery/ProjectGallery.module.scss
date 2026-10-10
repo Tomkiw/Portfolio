@@ -1,0 +1,38 @@
+@use "mixins" as *;
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 40px;
+  list-style: none;
+}
+
+// Block, like the flex items it replaces: an inline-block button inside <li>
+// would pick up extra line-box space under the baseline.
+.filter {
+  @include mono-label(11px, 0.12em);
+  display: block;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  color: var(--fg-dim);
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--fg-mute);
+    color: var(--fg);
+  }
+
+  &[aria-pressed="true"] {
+    border-color: var(--accent);
+    color: var(--fg-on-accent);
+    background: var(--accent);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}

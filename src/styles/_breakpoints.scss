@@ -1,0 +1,21 @@
+@use "sass:map";
+
+// Breakpoints come from the design, which was desktop-first (max-width queries).
+// Styles here are mobile-first: base rules target phones, mq(name) adds rules
+// for viewports wider than the breakpoint. `width > X` is the exact complement
+// of the design's `max-width: X`, so layouts switch at the same pixel.
+$breakpoints: (
+  sm: 600px,
+  md: 720px,
+  lg: 980px,
+);
+
+@mixin mq($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error "Unknown breakpoint `#{$name}`. Expected one of: #{map.keys($breakpoints)}.";
+  }
+
+  @media (width > #{map.get($breakpoints, $name)}) {
+    @content;
+  }
+}

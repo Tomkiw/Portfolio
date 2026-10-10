@@ -1,0 +1,54 @@
+@use "breakpoints" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--z-nav);
+  border-bottom: 1px solid var(--line);
+
+  // The blur lives on a pseudo-element: a backdrop-filter on the header itself would
+  // become the containing block of the fixed mobile-menu panel and squeeze it into the bar.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: color-mix(in srgb, var(--bg) 65%, transparent);
+    backdrop-filter: blur(18px);
+  }
+}
+
+// Vim mode (set by VimMode on <html>) highlights the bar's bottom edge.
+:global(html[data-vim]) .header {
+  border-bottom-color: var(--accent);
+}
+
+.bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+
+  @include mq(sm) {
+    padding-block: 18px;
+  }
+}
+
+// Fixed navigation has no place on paper.
+@media print {
+  .header {
+    display: none;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

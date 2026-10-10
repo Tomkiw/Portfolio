@@ -1,0 +1,70 @@
+@use "mixins" as *;
+
+.donut {
+  position: relative;
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  max-width: 90px;
+  margin: 0 auto;
+  // Start the arc at 12 o'clock instead of 3.
+  transform: rotate(-90deg);
+}
+
+.track {
+  stroke: var(--bg-elev);
+}
+
+.fill {
+  stroke: var(--accent);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.4s var(--ease-smooth);
+  filter: drop-shadow(0 0 6px var(--accent-glow));
+}
+
+.percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 14px));
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+
+  sup {
+    margin-left: 1px;
+    font-size: 11px;
+    color: var(--accent);
+  }
+}
+
+.label {
+  @include mono-label(10px, 0.08em);
+  display: block;
+  margin-top: 8px;
+  color: var(--fg-dim);
+}
+
+.finalValue {
+  display: none;
+}
+
+@media print {
+  .fill {
+    stroke-dashoffset: var(--filled-offset);
+  }
+
+  .liveValue {
+    display: none;
+  }
+
+  .finalValue {
+    display: inline;
+  }
+}

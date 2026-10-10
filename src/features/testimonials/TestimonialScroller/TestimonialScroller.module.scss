@@ -1,0 +1,158 @@
+@use "breakpoints" as *;
+
+.progress {
+  position: relative;
+  height: 1px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+  background: var(--line);
+}
+
+.progressBar {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 3px;
+  background: var(--accent);
+  transition:
+    width 0.3s,
+    left 0.3s;
+}
+
+.track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 4px 0 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Snapping is paused while dragging, otherwise every small move jumps back to the
+// nearest card (the design's drag fought with `mandatory` snap). On release the strip
+// settles on the closest card again.
+.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.card {
+  position: relative;
+  flex: 0 0 86%;
+  padding: 36px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+  scroll-snap-align: start;
+
+  @include mq(lg) {
+    flex-basis: 460px;
+    max-width: 460px;
+  }
+}
+
+.quoteMark {
+  position: absolute;
+  top: 16px;
+  right: 28px;
+  font-family: var(--font-display);
+  font-size: 60px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.quote p {
+  margin-bottom: 28px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fg-dim);
+  text-wrap: pretty;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--fg-on-accent);
+  background: linear-gradient(135deg, var(--accent), #4a1810);
+}
+
+.info {
+  display: block;
+}
+
+.name {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--fg-mute);
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--fg);
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+// On paper there is no scrolling: all cards wrap into rows, without the strip controls.
+// Kept last so it overrides the screen rules above.
+@media print {
+  .track {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+
+  .card {
+    flex-basis: 100%;
+    max-width: none;
+    break-inside: avoid;
+  }
+
+  .progress,
+  .controls {
+    display: none;
+  }
+}

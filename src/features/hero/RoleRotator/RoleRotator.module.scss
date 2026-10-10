@@ -1,0 +1,55 @@
+@use "mixins" as *;
+
+.rotator {
+  color: var(--fg);
+}
+
+// Text and caret are flex items here, exactly as in the design, so the caret sits at the same height.
+.typed {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: middle;
+  background: var(--accent);
+  transform: translateY(2px);
+  animation: blink 0.9s steps(1) infinite;
+}
+
+.srOnly {
+  @include visually-hidden;
+}
+
+// On paper a half-typed word makes no sense: print the full list of roles instead.
+@media print {
+  .typed {
+    display: none;
+  }
+
+  .srOnly {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}

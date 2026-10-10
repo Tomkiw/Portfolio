@@ -1,0 +1,98 @@
+@use "breakpoints" as *;
+@use "mixins" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  align-items: flex-start;
+
+  @include mq(lg) {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 72px;
+  }
+}
+
+.media {
+  position: relative;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+}
+
+.cardInner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+  background: grid-lines(rgb(255 255 255 / 0.02)), linear-gradient(135deg, #1f1c19, #0f0d0b);
+}
+
+.cardMeta {
+  @include mono-label(11px, 0.12em);
+  color: var(--fg-mute);
+}
+
+.stamp {
+  @include mono-label(11px, 0.14em);
+  position: absolute;
+  bottom: -28px;
+  left: 24px;
+  z-index: 2;
+  padding: 18px 22px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: var(--bg);
+
+  strong {
+    display: block;
+    margin-bottom: -2px;
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--fg);
+  }
+}
+
+.heading {
+  margin-bottom: 20px;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.text {
+  margin-bottom: 16px;
+  line-height: 1.65;
+  color: var(--fg-dim);
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 36px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--bg-card);
+
+  @include mq(md) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+}

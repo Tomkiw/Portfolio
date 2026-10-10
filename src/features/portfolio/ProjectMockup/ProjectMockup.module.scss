@@ -1,0 +1,165 @@
+$shape-strong: rgb(255 255 255 / 0.18);
+$shape-soft: rgb(255 255 255 / 0.08);
+$shape-card: rgb(255 255 255 / 0.07);
+$shape-card-border: rgb(255 255 255 / 0.05);
+
+.frame {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+// Card backgrounds. The design defined them only for a class v2 no longer
+// rendered, so every card looked the same; here they are applied to the frame.
+.gradient1 {
+  background: radial-gradient(ellipse at 20% 20%, var(--accent) 0%, #4a1810 40%, var(--bg) 80%);
+}
+
+.gradient2 {
+  background: linear-gradient(135deg, #1a1815 0%, #2d2924 50%, #0f0d0b 100%);
+}
+
+.gradient3 {
+  background: radial-gradient(ellipse at 70% 30%, #2a4a6a 0%, #14202c 50%, var(--bg) 100%);
+}
+
+.gradient4 {
+  background: linear-gradient(180deg, #1f1d1a, var(--accent) 200%);
+}
+
+.gradient5 {
+  background: radial-gradient(circle at 50% 60%, #3a2a4a 0%, #1a1424 60%, var(--bg) 100%);
+}
+
+.gradient6 {
+  background: linear-gradient(45deg, #2a3f2a, #0f140f);
+}
+
+.screen {
+  position: relative;
+  background: var(--bg-elev);
+}
+
+// Browser window. The design also drew a title bar with ● ● ● dots above the screen, but
+// its own `overflow: hidden` clipped it, so it never showed. Revealing it makes the bar run
+// into the "001 —" project number, so the window stays as the design actually renders it.
+.desktop {
+  padding: 36px 28px 28px;
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px 8px 4px 4px;
+    box-shadow: 0 30px 60px rgb(0 0 0 / 0.5);
+  }
+}
+
+.phone {
+  padding: 16px;
+
+  .screen {
+    width: 38%;
+    max-width: 200px;
+    overflow: hidden;
+    aspect-ratio: 9 / 19.5;
+    border: 6px solid var(--bg);
+    border-radius: 22px;
+    outline: 1px solid var(--line-strong);
+    box-shadow: 0 20px 50px rgb(0 0 0 / 0.6);
+
+    // Notch.
+    &::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      z-index: 2;
+      width: 60px;
+      height: 14px;
+      border-radius: var(--radius-pill);
+      background: var(--bg);
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+}
+
+.desktopContent {
+  padding: 18px;
+}
+
+.statusBarSpace {
+  flex: none;
+  height: 20px;
+}
+
+.headerShape {
+  width: 60%;
+  height: 12px;
+  border-radius: 2px;
+  background: $shape-strong;
+}
+
+.rowShape {
+  height: 8px;
+  border-radius: 2px;
+  background: $shape-soft;
+}
+
+.wide {
+  width: 85%;
+}
+
+.long {
+  width: 70%;
+}
+
+.medium {
+  width: 60%;
+}
+
+.short {
+  width: 40%;
+}
+
+.cardShape {
+  flex: 1;
+  border: 1px solid $shape-card-border;
+  border-radius: 4px;
+  background: $shape-card;
+}
+
+.cardGrid {
+  display: grid;
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.cardStack {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+}
+
+.pillShape {
+  width: 80px;
+  height: 22px;
+  margin-top: auto;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+}

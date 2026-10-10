@@ -1,0 +1,66 @@
+@use "mixins" as *;
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+
+  @media print {
+    display: none;
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  transition:
+    transform 0.12s ease,
+    width 0.2s,
+    height 0.2s;
+}
+
+.ring {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgb(255 255 255 / 0.5);
+  transition:
+    transform 0.18s ease,
+    width 0.3s,
+    height 0.3s,
+    border-color 0.3s;
+}
+
+.overLink {
+  width: 60px;
+  height: 60px;
+  border-color: var(--accent);
+}
+
+// Over a project card the ring grows into a solid "View →" badge.
+.overProject {
+  width: 110px;
+  height: 110px;
+  border-color: var(--accent);
+  background: var(--accent);
+  mix-blend-mode: normal;
+
+  &::after {
+    @include mono-label(10px, 0.16em);
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--fg-on-accent);
+  }
+}

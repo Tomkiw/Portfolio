@@ -1,0 +1,6 @@
+// No transition here on purpose: magnetic links already animate with
+// `transition: all ...` from their own class (button, contact email).
+// A `transition: transform` here would override it and kill the hover fades.
+.magnetic {
+  will-change: transform;
+}
