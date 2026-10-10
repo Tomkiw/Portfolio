@@ -1,35 +1,35 @@
 import type { Stat } from "@/types/content";
+import { PROFILE } from "./profile";
 
-// Snapshot of the public GitHub profile (github.com/Tomkiw) on 2026-10-06 — refresh it
-// together with the projects. Trends are month by month from August 2025.
+// Demo numbers of the template. Use only figures the client can back up — for a real
+// person, invented stats hurt more than a missing section.
 export const STATS: readonly Stat[] = [
   {
-    id: "commits",
-    value: 650,
+    id: "projects",
+    value: 60,
     unit: "+",
-    label: "Commits on GitHub",
-    trend: [60, 95, 257, 289, 322, 349, 422, 445, 502, 507, 571, 614, 628, 645, 653],
+    label: "Projects Shipped",
+    trend: [3, 5, 4, 7, 6, 9, 12, 11, 14, 18, 22, 28, 36, 44, 52, 60],
   },
   {
-    id: "repositories",
-    value: 38,
+    id: "clients",
+    value: 32,
     unit: "",
-    label: "Public Repositories",
-    trend: [4, 6, 10, 14, 16, 20, 23, 27, 32, 32, 34, 36, 36, 37, 38],
+    label: "Happy Clients",
+    trend: [1, 2, 3, 5, 6, 7, 10, 14, 17, 21, 25, 28, 32],
   },
   {
-    id: "live-demos",
-    value: 29,
-    unit: "",
-    label: "Live Demos",
-    trend: [4, 6, 10, 14, 16, 20, 22, 25, 28, 28, 28, 29, 29, 29, 29],
+    id: "experience",
+    value: PROFILE.experienceYears,
+    unit: "yr",
+    label: "Experience",
+    trend: [1, 1, 2, 2, 3, 4, 5, 6],
   },
   {
-    id: "months",
-    value: 14,
+    id: "awards",
+    value: 12,
     unit: "",
-    label: "Months of Coding",
-    // Commits per month: the rhythm behind the months.
-    trend: [60, 35, 162, 32, 33, 27, 73, 23, 57, 5, 64, 43, 14, 17, 8],
+    label: "Awards / Mentions",
+    trend: [0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 12],
   },
 ];

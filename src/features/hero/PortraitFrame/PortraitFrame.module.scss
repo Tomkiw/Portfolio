@@ -39,16 +39,22 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
 // In the design this block switched to `position: relative` by accident and collapsed
 // into a ~100px strip at the top of the frame; the duotone is meant to fill the frame.
 // The gradient is the design's duotone; the photo takes its colors from it (see .photo).
+// The placeholder caption stays at the top, where the design showed it — at the bottom
+// it would hide behind the "shipping production-grade code" badge.
 .media {
   position: absolute;
   inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 28px;
   // Keeps the photo's blending inside this block, away from the page behind it.
   isolation: isolate;
   background:
     radial-gradient(ellipse at 50% 35%, $duotone-light, transparent 55%),
     linear-gradient(135deg, $duotone-shades);
 
-  // Film grain, over the photo.
+  // Film grain, over the photo or the placeholder.
   &::after {
     content: "";
     position: absolute;
@@ -65,6 +71,41 @@ $noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' wid
   object-fit: cover;
   object-position: 50% 30%;
   mix-blend-mode: luminosity;
+}
+
+// Soft head-and-shoulders silhouette of the placeholder.
+.silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 70%;
+  aspect-ratio: 3 / 4;
+  border-radius: 50% 50% 8% 8%;
+  background:
+    radial-gradient(
+      ellipse at 50% 30%,
+      color-mix(in srgb, var(--accent) 18%, transparent) 0%,
+      transparent 50%
+    ),
+    radial-gradient(ellipse at 50% 45%, rgb(0 0 0 / 0.6) 0%, transparent 60%);
+  transform: translateX(-50%);
+}
+
+.placeholder {
+  @include mono-label(11px, 0.16em);
+  position: relative;
+  z-index: 1;
+  color: var(--fg-mute);
+  text-align: center;
+
+  em {
+    display: block;
+    margin-top: 6px;
+    font-size: 14px;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    color: var(--fg-dim);
+  }
 }
 
 .overlay {

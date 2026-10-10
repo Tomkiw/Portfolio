@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MEDIA_QUERY } from "@/lib/constants";
+import { HERO_COPY } from "@/lib/content/hero";
 import { FULL_NAME, PROFILE } from "@/lib/content/profile";
 import { cn } from "@/lib/utils/cn";
 import styles from "./PortraitFrame.module.scss";
@@ -12,22 +13,49 @@ const PHOTO_SIZES = `${MEDIA_QUERY.desktop} 480px, 380px`;
 
 const CORNERS = ["topLeft", "topRight", "bottomLeft", "bottomRight"] as const;
 
-/** Portrait composition: duotone photo, blueprint overlay, corner marks and two badges. */
+type PortraitPhotoProps = {
+  src: string;
+};
+
+function PortraitPhoto({ src }: PortraitPhotoProps) {
+  return (
+    <div className={styles.media}>
+      {/* Eager: the preloader covers the hero first, so the photo is ready when it opens. */}
+      <Image
+        src={src}
+        alt={`Portrait of ${FULL_NAME}`}
+        fill
+        sizes={PHOTO_SIZES}
+        loading="eager"
+        className={styles.photo}
+      />
+    </div>
+  );
+}
+
+/** The design's stand-in until there is a photo: a soft silhouette and a caption. */
+function PortraitPlaceholder() {
+  return (
+    <div className={styles.media} aria-hidden="true">
+      <span className={styles.silhouette} />
+      <p className={styles.placeholder}>
+        {HERO_COPY.portraitPlaceholder.title}
+        <em>{HERO_COPY.portraitPlaceholder.hint}</em>
+      </p>
+    </div>
+  );
+}
+
+/** Portrait composition: duotone photo or placeholder, blueprint overlay, corner marks, badges. */
 export function PortraitFrame() {
   return (
     <div className={styles.portrait}>
       <div className={styles.frame}>
-        <div className={styles.media}>
-          {/* Eager: the preloader covers the hero first, so the photo is ready when it opens. */}
-          <Image
-            src={PROFILE.portraitUrl}
-            alt={`Portrait of ${FULL_NAME}`}
-            fill
-            sizes={PHOTO_SIZES}
-            loading="eager"
-            className={styles.photo}
-          />
-        </div>
+        {PROFILE.portraitUrl ? (
+          <PortraitPhoto src={PROFILE.portraitUrl} />
+        ) : (
+          <PortraitPlaceholder />
+        )}
 
         <svg
           className={styles.overlay}
@@ -74,9 +102,9 @@ export function PortraitFrame() {
 
       <p className={styles.badge}>
         <strong>{PROFILE.experienceYears}+</strong>
-        Years Building
+        {HERO_COPY.portraitBadge}
       </p>
-      <p className={styles.tech}>{"</> shipping production-grade code"}</p>
+      <p className={styles.tech}>{HERO_COPY.portraitTech}</p>
     </div>
   );
 }

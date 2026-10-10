@@ -3,6 +3,7 @@ import { ArrowIcon } from "@/components/icons";
 import { Section } from "@/components/Section";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SECTION_ID } from "@/lib/content/navigation";
+import { getSectionHeader } from "@/lib/content/sections";
 import { SERVICES } from "@/lib/content/services";
 import { padNumber } from "@/lib/utils/format";
 import styles from "./Services.module.scss";
@@ -13,17 +14,7 @@ export function Services() {
   return (
     <Section id={SECTION_ID.services}>
       <Container>
-        <SectionHeader
-          eyebrow="/ 02 · What I Do"
-          title={
-            <>
-              What I can
-              <br />
-              help <em>with.</em>
-            </>
-          }
-          description="What I bring to a team today — each skill backed by code you can open on my GitHub."
-        />
+        <SectionHeader {...getSectionHeader("services")} />
 
         <ul className={styles.grid}>
           {SERVICES.map((service, index) => (

@@ -3,23 +3,14 @@ import { Section } from "@/components/Section";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SECTION_ID } from "@/lib/content/navigation";
 import { PROCESS_STEPS } from "@/lib/content/process";
+import { getSectionHeader } from "@/lib/content/sections";
 import styles from "./Process.module.scss";
 
 export function Process() {
   return (
     <Section id={SECTION_ID.process}>
       <Container>
-        <SectionHeader
-          eyebrow="/ 04 · How I Work"
-          title={
-            <>
-              Process
-              <br />
-              over <em>chaos.</em>
-            </>
-          }
-          description="The Scrum rhythm I practiced as Team Lead and Scrum Master: four steps, repeated every sprint, so the team always knows what's next."
-        />
+        <SectionHeader {...getSectionHeader("process")} />
 
         <ol className={styles.grid}>
           {PROCESS_STEPS.map((step) => (

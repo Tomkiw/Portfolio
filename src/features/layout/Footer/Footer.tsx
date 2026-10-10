@@ -1,8 +1,10 @@
 import { Container } from "@/components/Container";
 import { ArrowIcon } from "@/components/icons";
 import { Logo } from "@/components/Logo";
+import { FOOTER_COPY } from "@/lib/content/footer";
 import {
   anchorHref,
+  CTA_LABEL,
   FOOTER_LINKS,
   SCHEDULE_CALL_HREF,
   SOCIAL_LINKS,
@@ -26,7 +28,7 @@ export function Footer() {
 
           <nav aria-labelledby="footer-navigate">
             <h2 id="footer-navigate" className={styles.heading}>
-              Navigate
+              {FOOTER_COPY.headings.navigate}
             </h2>
             <ul className={styles.list}>
               {FOOTER_LINKS.map((link) => (
@@ -40,7 +42,7 @@ export function Footer() {
           </nav>
 
           <div>
-            <h2 className={styles.heading}>Connect</h2>
+            <h2 className={styles.heading}>{FOOTER_COPY.headings.connect}</h2>
             <ul className={styles.list}>
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.id}>
@@ -54,7 +56,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className={styles.heading}>Reach</h2>
+            <h2 className={styles.heading}>{FOOTER_COPY.headings.reach}</h2>
             <ul className={styles.list}>
               <li>
                 <a href={`mailto:${PROFILE.email}`} className={styles.link}>
@@ -63,14 +65,16 @@ export function Footer() {
               </li>
               <li>
                 <a href={SCHEDULE_CALL_HREF} className={styles.link}>
-                  Schedule a call
+                  {CTA_LABEL.scheduleCall}
                 </a>
               </li>
-              <li>
-                <a href={PROFILE.cvUrl} className={styles.link} download>
-                  Download CV (PDF)
-                </a>
-              </li>
+              {PROFILE.cvUrl ? (
+                <li>
+                  <a href={PROFILE.cvUrl} className={styles.link} download>
+                    {CTA_LABEL.downloadCvFile}
+                  </a>
+                </li>
+              ) : null}
             </ul>
           </div>
         </div>
@@ -79,8 +83,8 @@ export function Footer() {
           <span>
             © {CURRENT_YEAR} · {FULL_NAME}
           </span>
-          <span>Tap the logo 5× for vim mode ✦</span>
-          <span>Built with Next.js · Deployed on Vercel</span>
+          <span>{FOOTER_COPY.easterEggHint}</span>
+          <span>{FOOTER_COPY.credits}</span>
         </div>
       </Container>
     </footer>

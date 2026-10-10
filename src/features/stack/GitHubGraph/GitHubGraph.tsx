@@ -25,10 +25,7 @@ export async function GitHubGraph() {
           <GitHubIcon size={TITLE_ICON_SIZE} className={styles.icon} />
           <h3 className={styles.heading}>github.com/{activity.username}</h3>
           {activity.isDemo ? (
-            <span
-              className={styles.demoBadge}
-              title="Sample heatmap; the numbers are a snapshot of the GitHub profile"
-            >
+            <span className={styles.demoBadge} title="Sample data, not live GitHub stats">
               Demo
             </span>
           ) : null}
@@ -38,7 +35,7 @@ export async function GitHubGraph() {
             <strong>{activity.totalContributions}</strong> commits in last year
           </li>
           <li>
-            <strong>{activity.streakDays}</strong>-day best streak
+            <strong>{activity.streakDays}</strong>-day streak
           </li>
           <li>{activity.languages.join(" · ")}</li>
         </ul>

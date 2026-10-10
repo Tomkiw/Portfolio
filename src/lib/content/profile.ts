@@ -1,29 +1,23 @@
 import type { Profile } from "@/types/content";
 
+// Demo persona of the template — a fictional developer. Replace every value with the
+// client's data; add `cvUrl` and `portraitUrl` once their files are in /public.
 export const PROFILE: Profile = {
-  firstName: "Ihor",
-  lastName: "Tomkiv",
-  logoMark: "it",
-  handle: "tomkiw",
-  roles: [
-    "Junior Full-Stack Developer",
-    "Frontend Developer",
-    "React & Next.js Developer",
-    "Team Lead & Scrum Master",
-  ],
+  firstName: "Alex",
+  lastName: "Rivers",
+  logoMark: "ar",
+  handle: "arivers",
+  roles: ["Full-Stack Developer", "UI Engineer", "Product Designer", "Tooling Nerd"],
   tagline:
-    "I build responsive, accessible web apps with React, Next.js and Node.js, from semantic markup to REST APIs.",
-  summary:
-    "Junior full-stack developer from Ternopil building responsive web apps with React, Next.js and Node.js.",
-  availability: "Open to work",
-  location: "Ternopil, UA",
+    "I design and build performant, beautifully-engineered web experiences with React, Next.js and TypeScript.",
+  summary: "Independent developer building thoughtful products for the modern web.",
+  availability: "Available for new work",
+  location: "Kyiv, UA",
   timeZone: "Europe/Kyiv",
-  email: "igortomkiw3@gmail.com",
-  // Coding since August 2025 (first repository on GitHub).
-  experienceYears: 1,
-  stackSummary: "React · Next.js",
-  cvUrl: "/cv.pdf",
-  portraitUrl: "/images/portrait.png",
+  // Reserved example domain: mail to it never reaches a real person.
+  email: "hello@example.com",
+  experienceYears: 6,
+  stackSummary: "RSC · TS",
 };
 
 export const FULL_NAME = `${PROFILE.firstName} ${PROFILE.lastName}`;

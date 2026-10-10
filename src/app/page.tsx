@@ -12,9 +12,10 @@ import { Services } from "@/features/services/Services";
 import { StackSection } from "@/features/stack/StackSection";
 import { Stats } from "@/features/stats/Stats";
 import { Testimonials } from "@/features/testimonials/Testimonials";
-import { TESTIMONIALS } from "@/lib/content/testimonials";
+import { isSectionVisible } from "@/lib/content/sections";
 
-// Title and description come from the layout defaults.
+// Title and description come from the layout defaults. If the order of the numbered
+// sections changes here, change SECTION_ORDER in lib/content/sections.ts too.
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
@@ -30,7 +31,7 @@ export default function HomePage() {
         <Stats />
         <Services />
         <Portfolio />
-        {TESTIMONIALS.length > 0 ? <Testimonials /> : null}
+        {isSectionVisible("testimonials") ? <Testimonials /> : null}
         <Process />
         <StackSection />
         <Contact />

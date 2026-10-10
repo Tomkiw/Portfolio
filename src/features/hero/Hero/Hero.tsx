@@ -6,7 +6,8 @@ import { LiveClock } from "@/features/hero/LiveClock";
 import { PortraitFrame } from "@/features/hero/PortraitFrame";
 import { RoleRotator } from "@/features/hero/RoleRotator";
 import { HERO_NAME } from "@/lib/constants";
-import { anchorHref, SECTION_ID } from "@/lib/content/navigation";
+import { HERO_COPY } from "@/lib/content/hero";
+import { anchorHref, CTA_LABEL, SECTION_ID } from "@/lib/content/navigation";
 import { PROFILE } from "@/lib/content/profile";
 import styles from "./Hero.module.scss";
 
@@ -51,28 +52,31 @@ export function Hero() {
 
             <div className={styles.actions}>
               <ButtonLink href={anchorHref(SECTION_ID.contact)}>
-                Hire Me
+                {CTA_LABEL.hire}
                 <ArrowIcon />
               </ButtonLink>
-              <ButtonLink href={PROFILE.cvUrl} variant="ghost" download>
-                Download CV
-                <DownloadIcon />
-              </ButtonLink>
+              {PROFILE.cvUrl ? (
+                <ButtonLink href={PROFILE.cvUrl} variant="ghost" download>
+                  {CTA_LABEL.downloadCv}
+                  <DownloadIcon />
+                </ButtonLink>
+              ) : null}
             </div>
 
             <dl className={styles.meta}>
               <div>
-                <dt className={styles.metaLabel}>Based In</dt>
+                <dt className={styles.metaLabel}>{HERO_COPY.metaLabels.location}</dt>
                 <dd className={styles.metaValue}>{PROFILE.location}</dd>
               </div>
               <div>
-                <dt className={styles.metaLabel}>Experience</dt>
+                <dt className={styles.metaLabel}>{HERO_COPY.metaLabels.experience}</dt>
                 <dd className={styles.metaValue}>
-                  {PROFILE.experienceYears}+<em>years</em>
+                  {PROFILE.experienceYears}
+                  <em>{HERO_COPY.experienceUnit}</em>
                 </dd>
               </div>
               <div>
-                <dt className={styles.metaLabel}>Stack</dt>
+                <dt className={styles.metaLabel}>{HERO_COPY.metaLabels.stack}</dt>
                 <dd className={styles.metaValue}>{PROFILE.stackSummary}</dd>
               </div>
             </dl>
@@ -83,7 +87,7 @@ export function Hero() {
       </Container>
 
       <div className={styles.scrollHint} aria-hidden="true">
-        <span>Scroll</span>
+        <span>{HERO_COPY.scrollHint}</span>
         <span className={styles.scrollLine} />
       </div>
     </section>

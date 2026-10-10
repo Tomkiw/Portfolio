@@ -32,7 +32,7 @@ function StackListing() {
       ))}
 
       <p className={styles.line}>
-        <span className={styles.comment}># Currently learning</span>
+        <span className={styles.comment}># {TERMINAL.learningTitle}</span>
       </p>
       <p className={styles.line}>
         →{" "}

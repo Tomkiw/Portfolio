@@ -1,47 +1,48 @@
 import type { Service } from "@/types/content";
 
-// What I can take on in a team today — every item is backed by a project on GitHub.
+// Demo services of the template. Keep descriptions about two lines long at 1440px:
+// the cards align their text to the bottom, so uneven lengths make the titles jump.
 export const SERVICES: readonly Service[] = [
   {
-    id: "responsive-layout",
-    title: "Responsive Layout",
+    id: "web-apps",
+    title: "Web Application Development",
     description:
-      "Figma mockups turned into semantic, mobile-first pages that hold up from 320px to 1440px.",
-    tags: ["HTML5", "SCSS", "Figma"],
+      "End-to-end product engineering — from idea to production. SSR, edge functions, real-time data.",
+    tags: ["Next.js", "tRPC", "Edge"],
   },
   {
-    id: "react-apps",
-    title: "React & Next.js Apps",
+    id: "design-systems",
+    title: "UI Engineering & Design Systems",
     description:
-      "Interactive UIs with routing, forms and server data, typed end to end with TypeScript.",
-    tags: ["React", "Next.js", "TypeScript"],
+      "Component libraries, design tokens, accessibility audits. Pixel-tight implementations.",
+    tags: ["React", "Tailwind", "Radix"],
   },
   {
-    id: "state-data",
-    title: "State & Data Fetching",
+    id: "prototypes",
+    title: "Interactive Prototypes",
     description:
-      "TanStack Query for server data, Zustand for client state, every error state covered.",
-    tags: ["TanStack Query", "Zustand", "Axios"],
+      "High-fidelity prototypes that feel like the real thing. Animations, gestures, micro-interactions.",
+    tags: ["Framer", "GSAP", "WebGL"],
   },
   {
-    id: "rest-apis",
-    title: "REST APIs",
+    id: "performance",
+    title: "Performance Optimization",
     description:
-      "Node.js and Express on MongoDB: cookie auth, request validation, CORS and env config.",
-    tags: ["Node.js", "Express", "MongoDB"],
+      "Core Web Vitals, bundle analysis, image pipelines. Turning slow sites into instant ones.",
+    tags: ["Lighthouse", "CDN", "RSC"],
   },
   {
-    id: "forms-a11y",
-    title: "Forms & Accessibility",
+    id: "backend",
+    title: "Backend & API Design",
     description:
-      "Validated forms with clear errors, keyboard-friendly UI, ARIA where HTML is not enough.",
-    tags: ["Formik", "Yup", "ARIA"],
+      "Type-safe APIs, queues, scheduled jobs. Postgres + Prisma stacks I'd actually want to maintain.",
+    tags: ["Postgres", "Redis", "Prisma"],
   },
   {
-    id: "teamwork",
-    title: "Teamwork & Scrum",
+    id: "consulting",
+    title: "Technical Consulting",
     description:
-      "Team Lead and Scrum Master on team projects: sprint planning, task breakdown, code review.",
-    tags: ["Scrum", "Git", "GitHub"],
+      "Architecture reviews, code audits, hiring pipelines. A senior set of eyes on your codebase.",
+    tags: ["Audit", "Strategy", "Hiring"],
   },
 ];

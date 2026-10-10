@@ -3,7 +3,7 @@ import { ArrowIcon } from "@/components/icons";
 import { Logo } from "@/components/Logo";
 import { MobileMenu } from "@/features/layout/MobileMenu";
 import { NavLinks } from "@/features/layout/NavLinks";
-import { anchorHref, SECTION_ID } from "@/lib/content/navigation";
+import { anchorHref, CTA_LABEL, SECTION_ID } from "@/lib/content/navigation";
 import styles from "./Nav.module.scss";
 
 export function Nav() {
@@ -14,7 +14,7 @@ export function Nav() {
         <NavLinks />
         <div className={styles.actions}>
           <ButtonLink href={anchorHref(SECTION_ID.contact)}>
-            Let&apos;s Talk
+            {CTA_LABEL.talk}
             <ArrowIcon />
           </ButtonLink>
           <MobileMenu />

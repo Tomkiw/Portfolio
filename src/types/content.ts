@@ -1,5 +1,22 @@
 export type SectionId = "home" | "about" | "services" | "work" | "process" | "stack" | "contact";
 
+/** Sections with a numbered eyebrow ("/ 03 · …"), in no particular order. */
+export type NumberedSectionKey =
+  "about" | "services" | "work" | "testimonials" | "process" | "stack";
+
+/** A title whose last words are colored: lines are split by <br />, the accent ends the last one. */
+export type AccentTitle = {
+  lines: readonly string[];
+  accent: string;
+};
+
+export type SectionCopy = {
+  /** Eyebrow text after the automatic number, e.g. "About" in "/ 01 · About". */
+  label: string;
+  title: AccentTitle;
+  description: string;
+};
+
 export type Profile = {
   firstName: string;
   lastName: string;
@@ -18,9 +35,10 @@ export type Profile = {
   email: string;
   experienceYears: number;
   stackSummary: string;
-  cvUrl: string;
-  /** Hero photo from /public; the frame tints it into the orange duotone. */
-  portraitUrl: string;
+  /** CV file in /public. Without it the "Download CV" links are not rendered. */
+  cvUrl?: string;
+  /** Hero photo in /public, tinted into the orange duotone. Without it the frame shows the design's placeholder. */
+  portraitUrl?: string;
 };
 
 export type NavLink = {

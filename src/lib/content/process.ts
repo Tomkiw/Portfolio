@@ -1,12 +1,13 @@
 import type { ProcessStep } from "@/types/content";
 
+// Demo process of the template: four steps fill the row on desktop.
 export const PROCESS_STEPS: readonly ProcessStep[] = [
   {
-    id: "plan",
+    id: "discover",
     number: "01",
-    title: "Plan",
+    title: "Discover",
     description:
-      "Break the task into a backlog, agree on scope and the definition of done before any code is written.",
+      "Kickoff, audit, define success metrics. We agree on what good looks like before any code is written.",
     icon: "?",
   },
   {
@@ -14,7 +15,7 @@ export const PROCESS_STEPS: readonly ProcessStep[] = [
     number: "02",
     title: "Design",
     description:
-      "Treat the Figma mockup as a spec: components, breakpoints, hover, loading and error states.",
+      "Wireframes, prototypes, component sketches. Built tight and iterated with your team in the loop.",
     icon: "✎",
   },
   {
@@ -22,7 +23,7 @@ export const PROCESS_STEPS: readonly ProcessStep[] = [
     number: "03",
     title: "Build",
     description:
-      "Small commits, feature branches and pull requests with code review. The main branch always works.",
+      "Production-grade engineering with weekly demos. You always have something shippable in your hands.",
     icon: "▶",
   },
   {
@@ -30,7 +31,7 @@ export const PROCESS_STEPS: readonly ProcessStep[] = [
     number: "04",
     title: "Ship",
     description:
-      "Deploy to Vercel, check Lighthouse, demo at the sprint review and carry the feedback into the next sprint.",
+      "Deploy, monitor, optimize. Performance benchmarks, analytics, and a clean handoff to your team.",
     icon: "✦",
   },
 ];

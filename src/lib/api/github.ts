@@ -1,5 +1,5 @@
 import { GITHUB_GRAPH } from "@/lib/constants";
-import { GITHUB_SNAPSHOT } from "@/lib/content/activity";
+import { GITHUB_DEMO } from "@/lib/content/activity";
 import { createSeededRandom } from "@/lib/utils/random";
 import type { ContributionLevel, GitHubActivity } from "@/types/activity";
 
@@ -37,17 +37,17 @@ function generateDemoLevels(): ContributionLevel[] {
 }
 
 /**
- * Data for the GitHub contribution card: snapshot numbers and a generated heatmap, so the
+ * Data for the GitHub contribution card: demo numbers and a generated heatmap, so the
  * card shows a "Demo" badge. A real version would call the GitHub GraphQL API here, on the
  * server, with a token from .env (never a NEXT_PUBLIC_ variable) — the component would not change.
  */
 export async function getGitHubActivity(): Promise<GitHubActivity> {
   return {
     isDemo: true,
-    username: GITHUB_SNAPSHOT.username,
-    totalContributions: GITHUB_SNAPSHOT.totalContributions,
-    streakDays: GITHUB_SNAPSHOT.streakDays,
-    languages: GITHUB_SNAPSHOT.languages,
+    username: GITHUB_DEMO.username,
+    totalContributions: GITHUB_DEMO.totalContributions,
+    streakDays: GITHUB_DEMO.streakDays,
+    languages: GITHUB_DEMO.languages,
     levels: generateDemoLevels(),
   };
 }
